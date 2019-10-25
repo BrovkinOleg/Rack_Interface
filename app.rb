@@ -8,11 +8,9 @@ class App
 
   def call(env)
     @request = Rack::Request.new(env)
+    response = TimeFormatter.new(@request.params)
     case @request.path_info
-
-    when TimeFormatter.valid_path?
-      response = TimeFormatter.new(@request.params)
-
+    when response.valid_path?
       if response.valid_format?
         response(200, response.call)
       else
