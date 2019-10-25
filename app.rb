@@ -8,11 +8,12 @@ class App
 
   def call(env)
     @request = Rack::Request.new(env)
-
     case @request.path_info
-    when '/time'
+
+    when TimeFormatter.valid_path?
       response = TimeFormatter.new(@request.params)
-      if response.wrong_formats.empty?
+
+      if response.valid_format?
         response(200, response.call)
       else
         response(400, "Unknown time format #{ response.wrong_formats }")

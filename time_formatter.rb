@@ -1,7 +1,6 @@
 class TimeFormatter
 
-  attr_reader :time_format, :wrong_formats
-
+  # attr_reader :time_format, :wrong_formats
   FORMATS = {
       'year' => ' %Y -', 'month' => ' %m -', 'day' => ' %d ',
       'hour' => ' %H :', 'minute' => ' %M :', 'second' => ' %S '
@@ -15,6 +14,14 @@ class TimeFormatter
 
   def call
     Time.now.strftime(@time_format)
+  end
+
+  def valid_format?
+    @wrong_formats.empty?
+  end
+
+  def valid_path?
+    '/time'
   end
 
   private
